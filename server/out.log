@@ -1,0 +1,119 @@
+Step 1/2 : FROM nginx
+ ---> f949e7d76d63
+Step 2/2 : COPY ./default.conf /etc/nginx/conf.d/
+ ---> Using cache
+ ---> 2272d5e78c5a
+Successfully built 2272d5e78c5a
+Successfully tagged complex_nginx:latest
+Step 1/6 : FROM node:alpine
+ ---> ef7d474eab14
+Step 2/6 : WORKDIR /app
+ ---> Using cache
+ ---> 5e297586aa3c
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> 535677f3dd6e
+Step 4/6 : RUN npm i
+ ---> Using cache
+ ---> 6c507f83c9d8
+Step 5/6 : COPY . .
+ ---> 9b696fd098b5
+Step 6/6 : CMD ["npm", "run", "dev"]
+ ---> Running in a28438167624
+Removing intermediate container a28438167624
+ ---> af69aef39aa5
+Successfully built af69aef39aa5
+Successfully tagged complex_api:latest
+Step 1/6 : FROM node:alpine
+ ---> ef7d474eab14
+Step 2/6 : WORKDIR '/app'
+ ---> Using cache
+ ---> 5e297586aa3c
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> ce771fdc9d7c
+Step 4/6 : RUN npm i
+ ---> Using cache
+ ---> e93c0313c585
+Step 5/6 : COPY . .
+ ---> Using cache
+ ---> 862943034303
+Step 6/6 : CMD ["npm", "start"]
+ ---> Using cache
+ ---> 889abde10d26
+Successfully built 889abde10d26
+Successfully tagged complex_client:latest
+Step 1/6 : FROM node:alpine
+ ---> ef7d474eab14
+Step 2/6 : WORKDIR /app
+ ---> Using cache
+ ---> 5e297586aa3c
+Step 3/6 : COPY ./package.json ./
+ ---> Using cache
+ ---> 6c696911bd77
+Step 4/6 : RUN npm i
+ ---> Using cache
+ ---> 8989d053320c
+Step 5/6 : COPY . .
+ ---> Using cache
+ ---> 9f03c792fbba
+Step 6/6 : CMD ["npm", "start"]
+ ---> Using cache
+ ---> 58045b3c4efc
+Successfully built 58045b3c4efc
+Successfully tagged complex_worker:latest
+Attaching to complex_client_1, complex_postgres_1, complex_api_1, complex_worker_1, complex_redis_1, complex_nginx_1
+[33mpostgres_1  |[0m 2019-10-06 21:29:34.186 UTC [1] LOG:  starting PostgreSQL 12.0 (Debian 12.0-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit
+[31mredis_1     |[0m 1:C 06 Oct 2019 21:29:34.577 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[31mredis_1     |[0m 1:C 06 Oct 2019 21:29:34.577 # Redis version=5.0.6, bits=64, commit=00000000, modified=0, pid=1, just started
+[31mredis_1     |[0m 1:C 06 Oct 2019 21:29:34.577 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+[33mpostgres_1  |[0m 2019-10-06 21:29:34.291 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+[33mpostgres_1  |[0m 2019-10-06 21:29:34.291 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+[34mnginx_1     |[0m 2019/10/06 21:29:34 [emerg] 1#1: host not found in upstream "server:5000" in /etc/nginx/conf.d/default.conf:6
+[34mnginx_1     |[0m nginx: [emerg] host not found in upstream "server:5000" in /etc/nginx/conf.d/default.conf:6
+[31mredis_1     |[0m 1:M 06 Oct 2019 21:29:34.580 * Running mode=standalone, port=6379.
+[31mredis_1     |[0m 1:M 06 Oct 2019 21:29:34.580 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+[31mredis_1     |[0m 1:M 06 Oct 2019 21:29:34.580 # Server initialized
+[31mredis_1     |[0m 1:M 06 Oct 2019 21:29:34.580 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+[31mredis_1     |[0m 1:M 06 Oct 2019 21:29:34.580 * DB loaded from disk: 0.000 seconds
+[31mredis_1     |[0m 1:M 06 Oct 2019 21:29:34.580 * Ready to accept connections
+[33mpostgres_1  |[0m 2019-10-06 21:29:34.296 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+[33mpostgres_1  |[0m 2019-10-06 21:29:34.363 UTC [25] LOG:  database system was shut down at 2019-10-06 21:24:27 UTC
+[33mpostgres_1  |[0m 2019-10-06 21:29:34.371 UTC [1] LOG:  database system is ready to accept connections
+[36mclient_1    |[0m 
+[36mclient_1    |[0m > client@0.1.0 start /app
+[36mclient_1    |[0m > react-scripts start
+[36mclient_1    |[0m 
+[32mapi_1       |[0m 
+[32mapi_1       |[0m > @ dev /app
+[32mapi_1       |[0m > nodemon
+[32mapi_1       |[0m 
+[35mworker_1    |[0m 
+[35mworker_1    |[0m > @ start /app
+[35mworker_1    |[0m > node index.js
+[35mworker_1    |[0m 
+[32mapi_1       |[0m [33m[nodemon] 1.18.3[39m
+[32mapi_1       |[0m [33m[nodemon] to restart at any time, enter `rs`[39m
+[32mapi_1       |[0m [33m[nodemon] watching: *.*[39m
+[32mapi_1       |[0m [32m[nodemon] starting `node index.js`[39m
+[32mapi_1       |[0m Listening
+[36mclient_1    |[0m Starting the development server...
+[36mclient_1    |[0m 
+[34mcomplex_nginx_1 exited with code 1
+[0m[36mclient_1    |[0m Compiled successfully!
+[36mclient_1    |[0m 
+[36mclient_1    |[0m You can now view client in the browser.
+[36mclient_1    |[0m 
+[36mclient_1    |[0m   Local:            http://localhost:3000/
+[36mclient_1    |[0m   On Your Network:  http://172.19.0.3:3000/
+[36mclient_1    |[0m 
+[36mclient_1    |[0m Note that the development build is not optimized.
+[36mclient_1    |[0m To create a production build, use npm run build.
+[36mclient_1    |[0m 
+[36;1mcomplex_nginx_1 exited with code 1
+[0m[33;1mcomplex_nginx_1 exited with code 1
+[0m[32;1mcomplex_nginx_1 exited with code 1
+[0m[35;1mcomplex_nginx_1 exited with code 1
+[0m[31;1mcomplex_nginx_1 exited with code 1
+[0m[34;1mcomplex_nginx_1 exited with code 1
+[0mGracefully stopping... (press Ctrl+C again to force)
