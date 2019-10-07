@@ -2,17 +2,17 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t danielpatrickgraham/react-test -f ./client/Dockerfile.dev .
+  - docker build -t danielpatrickgraham/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   #- docker run dpgraham/react-test npm test -- --coverage
   - docker run -e CI=true danielpatrickgraham/react-test npm test
 
 after_success:
-  - docker build -t danielpatrickgraham/multi-client ./client .
-  - docker build -t danielpatrickgraham/multi-nginx ./nginx .
-  - docker build -t danielpatrickgraham/multi-server ./server .
-  - docker build -t danielpatrickgraham/multi-worker ./worker .
+  - docker build -t danielpatrickgraham/multi-client ./client
+  - docker build -t danielpatrickgraham/multi-nginx ./nginx
+  - docker build -t danielpatrickgraham/multi-server ./server
+  - docker build -t danielpatrickgraham/multi-worker ./worker
   # Log into docker cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password
   # Take those images and push them to docker hub
